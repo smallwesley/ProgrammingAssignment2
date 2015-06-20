@@ -2,6 +2,7 @@
 ## @author      Wesley Small (smallwesley)
 ## @course      R-Programming RPROG-015
 ## @assignment  #2 Lexical Scooping
+## @date        2015-06-20
 ##
 ## @description:
 ## Matrix inversion calculations can be intensive in computation. 
@@ -25,6 +26,7 @@
 ##  > param: x = an invertible square matrix
 ##  > answer: a list with functions to manage the matrix and it's 
 #             inverse
+## ---------------------------------------------------------------
 makeCacheMatrix <- function(x = matrix()) {
 
     # INITIALIZE INVERSE IN THIS ENVIRONMENT 
@@ -71,19 +73,20 @@ makeCacheMatrix <- function(x = matrix()) {
 ## > param: x = an invertible square matrix
 ## > param: ... = an arbitrary number && variety of arguments
 ## > answer: returns a matrix that is the inverse of square matrix 'x'
+## ---------------------------------------------------------------
 cacheSolve <- function(x, ...) {
  
     # CHECK IF INVERSE PRE-COMPUTED WITHIN SPECIAL MATRIX OBJECT
     oInverse <- x$retrieveInverse()
     
     if(!is.null( oInverse ) ) {
-        message("[DEBUG] retrival from cache successful; returning inverse")
+        message("[DEBUG] Retrival from cache successful - Returning cached inverse")
         return( oInverse )
     }
     
     # IF REACHED THIS POINT...
     # CONTINUE 1. COMPUTE INVERSE OF MATRIX, 2. CACHE AND 3. RETURN RESULT
-    message("[DEBUG] computing inverse of matrix..")
+    message("[DEBUG] Computing inverse of matrix..")
     
     # OBTAIN ORIGINAL BASE MATRIX FROM SPECIAL MATRIX OBJECT
     oMatrix <- x$getMatrix()
