@@ -159,3 +159,39 @@ testMatrixInverseComputations <- function() {
     message( "[TEST] END OF TESTS!")
     return
 }
+
+## ---------------------------------------------------------------
+## Unit Test: testMatrixInversePerformance
+testMatrixInversePerformance <- function(paramNumber, paramRange) {
+    ## Creates a square matrix whose elements are independently
+    ## sampled from a uniform distribution.
+    ## Obtained this method on RPROG Foums/Discussion.
+    ## > param n  = The number of rows and columns
+    ## > param rng = The range of values to sample each element from
+    ## > answer =   Returns the randomly-generated matrix.    
+    rand.mtx <- function(n, rng = 1:10) {
+        matrix(sample(rng, n^2, replace=TRUE), c(n, n))
+    } 
+    
+    ## CREATE ATOMIC SQUARE MATRIX
+    sqMatrix1 <- rand.mtx(paramNumber, paramRange) 
+    print (sqMatrix1)
+    
+    # CONSTRUCT INTIAL SPECIAL MATRIX
+    specialMatrix1 = makeCacheMatrix( sqMatrix1 )
+    #print( specialMatrix1 )
+    
+    # TEST 1
+    message("[TEST] #1 - Initial Create & Cache")
+    ptm <- proc.time()
+    sqMatrix1AnswerA <- cacheSolve( specialMatrix1 )
+    print( paste("Inital Create & Cache Duration = ", proc.time() - ptm) )
+    
+    # TEST 2
+    message("[TEST] #2 - Retrieve From Cache")
+    ptm <- proc.time()
+    sqMatrix1AnswerB <- cacheSolve( specialMatrix1 ) 
+    print( paste("Retrieve From Cache = ",proc.time() - ptm) )
+    
+    message("[TEST] END PERFORMANCE TEST")
+}
